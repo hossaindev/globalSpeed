@@ -4,6 +4,12 @@ import { IndicatorInit } from "@/types"
 import { insertStyle } from "@/utils/nativeUtils"
 import styles from "./Indicator.css?inline"
 import { Popover } from "./Popover"
+import { formatTime, getRemainingReal } from "./remainingTime"
+this.main.append(opts.text || "")
+if (opts.media) {
+	const remaining = getRemainingReal(opts.media)
+	if (remaining !== null) this.main.append(` · -${formatTime(remaining)}`)
+}
 
 const BASE_FONT_SIZE = 30
 const BASE_PADDING = 10
@@ -101,3 +107,4 @@ export type IndicatorShowOpts = {
 	static?: boolean
 	fontSize?: string
 }
+	media?: HTMLMediaElement
