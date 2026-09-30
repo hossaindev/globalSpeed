@@ -388,6 +388,10 @@ function getMediaInfo(elem: HTMLMediaElement) {
 		dur = `${dur} → ${formatDuration(elem.currentTime / elem.playbackRate)} / ${formatDuration(elem.duration / elem.playbackRate)}`
 	}
 	lines.push(dur)
+		if (Number.isFinite(elem.duration) && elem.playbackRate > 0) {
+		const remaining = (elem.duration - elem.currentTime) / elem.playbackRate
+		lines.push(`Remaining: ${formatDuration(remaining)}`)
+	}
 	lines.push(`Speed: ${round(elem.playbackRate, 2)}x, Volume: ${(elem.volume * 100).toFixed(0)}%${elem.muted ? " (Muted)" : ""}`)
 	return lines.join("\n")
 }
